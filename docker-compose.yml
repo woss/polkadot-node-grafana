@@ -1,0 +1,43 @@
+version: "3"
+networks:
+  polkadot-node-net:
+    driver: bridge
+services:
+  grafana:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+    restart: unless-stopped
+    expose:
+      - 3000
+    ports:
+      - 33145:3000
+    networks:
+      - polkadot-node-net
+    links:
+      - kusama
+    labels:
+      org.label-schema.group: "polkadot"
+  kusama:
+    image: chevdor/polkadot:latest
+    ports:
+      - 9933
+      - 30333
+      - 9944
+      - 9955
+    restart: unless-stopped
+    command: polkadot --chain ${POLKADOT_NETWORK} --name "${POLKADOT_NODE_NAME}" --grafana-external --wasm-execution Compiled
+    volumes:
+      - kusama:/polkadot/.local/share/polkadot
+    networks:
+      - polkadot-node-net
+volumes:
+  kusama:
+  grafana_data:

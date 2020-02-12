@@ -1,0 +1,11 @@
+apiVersion: 1
+
+datasources:
+  - name: Kusama
+    type: simpod-json-datasource
+    access: proxy
+    orgId: 1
+    url: http://kusama:9955
+    basicAuth: false
+    isDefault: true
+    editable: true
