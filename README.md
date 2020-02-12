@@ -1,21 +1,33 @@
 ---
-title: "Running full node and visualizing node metrics with grafana using docker"
+title: "Run full node with grafana and docker"
 ---
 
-## Step 1: Install Docker
+## Step 1: Prepare the environment
 
 If you're on
 macOS, the easiest way to do that is to follow [installation guide here](https://docs.docker.com/docker-for-mac/install/)
 
 If you are on Windows the easiest way to do that is to follow [installation guide here](https://docs.docker.com/docker-for-windows/install/)
 
-## Set 2. Change and Verify configuration
+Now let's clone the repository which contains the files we will need.
 
-Most certainly you would like to change the name of the full node. Default name is `DragonBreath` and it can be found in file `.env` at the root of this repo.
+Open terminal of your choice in type:
 
-Default network will be `kusama` and it can be changed as well in `.env` file at the root of this repo.
+```bash
+git clone https://github.com/woss/polkadot-node-grafana
 
-Open terminal of your choice in the root of this repository and type:
+cd polkadot-node-grafana
+```
+
+## Set 2. Configuration
+
+Most certainly you would like to change the name of the full node.
+
+Default node name is `DragonsBreath` and it can be found in `.env` file in the root of this repository.
+
+Default network will be `kusama` and it can be changed as well in `.env` file in the root of this repository.
+
+Reuse the same terminal from Step 1. and type:
 
 ```bash
 docker-compose config
@@ -88,6 +100,8 @@ Then it will run the grafana and polkadot containers.
 ## Step 4. Visualisation
 
 If everything went OK you should be able to access the instance on following link [http://localhost:33145](http://localhost:33145)
+
+Grafana comes with predefined dashboard called `Polkadot`.
 
 ```
 Username: admin
