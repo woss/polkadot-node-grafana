@@ -42,7 +42,7 @@ networks:
 services:
   grafana:
     build:
-      context: C:\Users\daniel\Projects\github\woss\polkadot-full-node-with-grafana
+      context: /your-abs-path
       dockerfile: Dockerfile
     environment:
       GF_SECURITY_ADMIN_PASSWORD: admin
@@ -61,7 +61,7 @@ services:
     restart: unless-stopped
     volumes:
       - grafana_data:/var/lib/grafana:rw
-      - C:\Users\daniel\Projects\github\woss\polkadot-full-node-with-grafana\grafana\provisioning:/etc/grafana/provisioning:rw
+      - /your-abs-path/grafana/provisioning:/etc/grafana/provisioning:rw
   kusama:
     command: polkadot --chain kusama --name "DragonsBreath" --grafana-external --wasm-execution Compiled
     image: chevdor/polkadot:latest
